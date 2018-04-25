@@ -26,17 +26,17 @@
   "author": "The Impact Team (https://impactdevelopment.github.io)",
   "license": "MIT",
   "dependencies": {
-    "jsonwebtoken": "^8.2.0",
-    "restify": "^6.3.4",
+    "jsonwebtoken": "^8.2.1",
+    "restify": "^6.4.0",
     "restify-errors": "^6.0.0",
-    "restify-jwt-community": "^1.0.2",
-    "winston": "^2.4.0"
+    "restify-jwt-community": "^1.0.4",
+    "winston": "^2.4.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "cross-env": "^5.1.3",
-    "eslint": "^4.18.2",
-    "mocha": "^5.0.2",
+    "cross-env": "^5.1.4",
+    "eslint": "^4.19.1",
+    "mocha": "^5.1.1",
     "supertest": "^3.0.0"
   }
 }
