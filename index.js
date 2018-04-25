@@ -3,6 +3,8 @@ const config    = require('./config')
 const logger    = require('./utils/logger')
 
 const jwt       = require('restify-jwt-community')
+if (config.usingDefaultSecret())
+    logger.warn('Using the default JWT secret')
 
 logger.info('%s: initializing', MODULE_ID)
 
