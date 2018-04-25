@@ -15,12 +15,11 @@ const server  = restify.createServer()
 server.use(plugins.bodyParser())
 
 // Auth
-const jwtConfig = {
+server.use(jwt({
+    // Config
     'secret': config.JWT_SECRET
-}
-
-// secure all routes. except /ping
-server.use(jwt(jwtConfig).unless({
+}).unless({
+    // Unauthenticated paths
     'path': [
         config.basePath('/ping'),
         config.basePath('/register')
