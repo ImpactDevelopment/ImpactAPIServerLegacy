@@ -6,20 +6,20 @@ const jwt       = require('restify-jwt-community')
 
 logger.info('%s: initializing', MODULE_ID)
 
-var restify = require('restify')
-var plugins = require('restify').plugins
+const restify = require('restify')
+const plugins = require('restify').plugins
 
-var server  = restify.createServer()
+const server  = restify.createServer()
 server.use(plugins.bodyParser())
 
 // Auth
-var jwtConfig = {
-    secret: config.JWT_SECRET
+const jwtConfig = {
+    'secret': config.JWT_SECRET
 }
 
 // secure all routes. except /ping
 server.use(jwt(jwtConfig).unless({
-    path: [
+    'path': [
         config.basePath('/ping'),
         config.basePath('/register')
     ]

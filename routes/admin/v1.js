@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
         return res.send(new httpErr.ForbiddenError('You don\'t have sufficient priviledges.'))
     }
 
-    res.send({ action: 'completed' })
+    res.send({ 'action': 'completed' })
 
     logger.info('%s: response sent', MODULE_ID)
     return next()

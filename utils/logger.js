@@ -2,15 +2,15 @@ const winston   = require('winston')
 const config    = require('../config')
 
 const logger    = new (winston.Logger)({
-    level: config.LOG_LEVEL,
-    transports: [
+    'level': config.LOG_LEVEL,
+    'transports': [
         new (winston.transports.Console)({
-            silent: false,
-            timestamp: false,
-            colorize: true
+            'silent': false,
+            'timestamp': false,
+            'colorize': true
         })
     ],
-    exitOnError: false
+    'exitOnError': false
 })
 
 module.exports = logger

@@ -1,4 +1,3 @@
-'use strict'
 
 const apiserver = require('../../test/server')
 const expect    = require('chai').expect
@@ -7,7 +6,7 @@ describe('ROUTE: /api/register', () => {
     it('should be a bad request without name', (done) => {
         apiserver
         .post('/api/register')
-        .send({ role: 'test' })
+        .send({ 'role': 'test' })
         .expect('Content-type', /json/)
         .end( (err, res) => {
             if (err) {
@@ -25,7 +24,7 @@ describe('ROUTE: /api/register', () => {
     it('should be a bad request without role', (done) => {
         apiserver
         .post('/api/register')
-        .send({ name: 'ci-test-account' })
+        .send({ 'name': 'ci-test-account' })
         .expect('Content-type', /json/)
         .end( (err, res) => {
             if (err) {
@@ -44,8 +43,8 @@ describe('ROUTE: /api/register', () => {
         apiserver
         .post('/api/register')
         .send({
-            name: 'ci-test-account',
-            role: 'test'
+            'name': 'ci-test-account',
+            'role': 'test'
         })
         .expect('Content-type', /json/)
         .end( (err, res) => {

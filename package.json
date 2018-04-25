@@ -4,7 +4,9 @@
   "description": "An API for use with Impact",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint .",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "pretest": "npm run lint",
     "test": "cross-env LOG_LEVEL=error mocha --recursive --reporter spec --exit ./test/specs/",
     "debug": "cross-env LOG_LEVEL=debug node index.js",
     "start": "node index.js"

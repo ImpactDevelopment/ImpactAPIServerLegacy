@@ -1,4 +1,3 @@
-'use strict'
 
 const apiserver    = require('../../test/server')
 const headers   = require('../../test/headers')

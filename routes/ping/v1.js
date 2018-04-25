@@ -4,7 +4,7 @@ const logger    = require('../../utils/logger')
 module.exports = (req, res, next) => {
     logger.info('%s: request received', MODULE_ID)
 
-    res.send({ ping: 'OK' })
+    res.send({ 'ping': 'OK' })
 
     logger.info('%s: response sent', MODULE_ID)
     return next()

@@ -1,4 +1,3 @@
-'use strict'
 
 const apiserver = require('../../test/server')
 const expect    = require('chai').expect
