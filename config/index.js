@@ -8,6 +8,7 @@ module.exports = {
     'LOG_LEVEL'   : process.env['LOG_LEVEL'] || 'info',
     'PORT'        : process.env['PORT'] || 8080,
     'JWT_SECRET'  : process.env['JWT_SECRET'] || DEFAULT_SECRET,
+    'MONGODB_URI' : process.env['MONGODB_URI'],
 
     'usingDefaultSecret' : () => DEFAULT_SECRET === module.exports.JWT_SECRET,
 
