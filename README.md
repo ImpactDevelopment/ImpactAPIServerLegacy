@@ -1,66 +1,36 @@
-# node-restify-jwt-sample
+# Impact API Server
 
-A sample api service with JWT authentication
+An API for Impact...
 
-## What's Inside
+## Installing
 
-* route path prefix
-* versioned routes
-* protected/unprotected routes
-* registration
-* admin/non-admin routes
-* logging (using winston)
-* unit tests
+First ensure nodejs and npm are correctly installed by running `node -v` and `npm -v`. If not follow instructions for your OS [here][install-node].
 
-## Configure
+Next make sure to clone this repo. If you have git installed you can run `git clone https://github.com/ImpactDevelopment/ImpactAPIServer.git`. If not you can still [download][download-repo-zip] the repo as a zip archive instead.
 
-See `/config/index.js`
+Finally you want to install the project's dependencies using npm. `cd` a terminal iside of the repo directory and run `npm install`.
 
-## Examples
+## Running
 
-Use `api/register` to generate tokens.
+To start the server you can run either `npm start` or `node index.js`. You should see something like this:
 
-```sh
-$ curl -X POST \
-> -H "Content-Type: application/json" \
-> --data '{ "name": "Johnny Appleseed", "role": "test" }' \
-http://localhost:8080/api/register
+```bash
+$ npm start
 
-{"name":"Johnny Appleseed","role":"test","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obm55IEFwcGxlc2VlZCIsInJvbGUiOiJ0ZXN0IiwiaWF0IjoxNTA5MDc2MTEwfQ.EsRsidT33amgeDX8u6SlE6LwWUs2jpyblogOvLaJ1Y8"}
+> impact-api@0.0.1 start /path/to/ImpactAPIServer
+> node index.js
 
-$ curl -X POST \
-> -H "Content-Type: application/json" \
-> --data '{ "name": "Tim Cook", "role": "admin" }' \
-http://localhost:8080/api/register
-
-{"name":"Tim Cook","role":"admin","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGltIENvb2siLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1MDkwNzY0NzB9.f5_v9HfOAiOS4IiiQ5Pj0IxLOMJGWUhHQ57Zd9opqwE"}
-
+info: util:logger: ENV LOG_LEVEL = info
+info: app:main: initializing
+info: app:main: ready. listening on PORT  8080
 ```
 
-Route protection
+You can now send requests to `localhost` using the port printed by the server (in the example above that's `localhost:8080`)
 
-```sh
-$ curl localhost:8080/api/ping
-{"ping":"OK"}
+## Credits
 
-$ curl localhost:8080/api/home
-{"code":"InvalidCredentials","message":"No authorization token was found"}
-```
+- [node-restify-jwt-sample][nrjs-example] by @supermamon
 
-Protected route
-
-```sh
-$ curl -H "Authorization: Bearer your-token" localhost:8080/api/home
-{"welcome":"Johnny Appleseed"}
-
-```
-
-Admin route
-
-```sh
-$ curl -H "Authorization: Bearer admin-token" localhost:8080/api/admin
-{"action":"completed"}
-
-$ curl -H "Authorization: Bearer user-token" localhost:8080/api/admin
-{"code":"Forbidden","message":"You don't have sufficient priviledges."}
-```
+[nrjs-example]: https://github.com/supermamon/node-restify-jwt-sample
+[install-node]: https://nodejs.org/en/download/package-manager
+[download-repo-zip]: https://github.com/ImpactDevelopment/ImpactAPIServer/archive/master.zip

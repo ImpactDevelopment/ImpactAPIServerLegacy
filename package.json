@@ -1,7 +1,7 @@
 {
-  "name": "node-restify-jwt-sample",
-  "version": "1.1.0",
-  "description": "A sample restify api service with JWT authentication",
+  "name": "impact-api",
+  "version": "0.0.1",
+  "description": "An API for use with Impact",
   "main": "index.js",
   "scripts": {
     "pretest": "eslint .",
@@ -11,16 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/supermamon/node-restify-jwt-sample"
+    "url": "https://github.com/ImpactDevelopment/ImpactAPIServer"
   },
   "keywords": [
+    "impact",
+    "minecraft",
     "node",
     "api",
+    "server",
     "restify",
     "jwt",
     "authentication"
   ],
-  "author": "Raymond Velasquez <at.supermamon@gmail.com> (https://supermamon.com)",
+  "author": "The Impact Team (https://impactdevelopment.github.io)",
   "license": "MIT",
   "dependencies": {
     "jsonwebtoken": "^8.2.0",
