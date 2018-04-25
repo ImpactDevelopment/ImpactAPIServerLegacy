@@ -29,6 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "jsonwebtoken": "^8.2.1",
+    "mongodb": "^3.0.7",
     "restify": "^6.4.0",
     "restify-errors": "^6.0.0",
     "restify-jwt-community": "^1.0.4",
