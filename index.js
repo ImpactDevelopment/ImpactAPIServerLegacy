@@ -2,14 +2,11 @@ const MODULE_ID = 'app:main'
 const config    = require('./config')
 const logger    = require('./utils/logger')
 
-const jwt       = require('restify-jwt-community')
-if (config.usingDefaultSecret())
-    logger.warn('Using the default JWT secret')
-
-logger.info('%s: initializing', MODULE_ID)
-
+const jwt     = require('restify-jwt-community')
 const restify = require('restify')
 const plugins = require('restify').plugins
+
+logger.info('%s: initializing', MODULE_ID)
 
 const server  = restify.createServer()
 server.use(plugins.bodyParser())
