@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "pretest": "npm run lint",
-    "test": "cross-env LOG_LEVEL=error mocha --recursive --reporter spec --exit --require ./test/init.js ./test/specs/",
+    "test": "cross-env LOG_LEVEL=error mocha --recursive --reporter spec --exit --require ./test/init.js ./test/unit/ ./test/api-spec/",
     "debug": "cross-env LOG_LEVEL=debug node index.js",
     "start": "node index.js"
   },
@@ -30,6 +30,7 @@
   "dependencies": {
     "jsonwebtoken": "^8.2.1",
     "mongodb": "^3.0.7",
+    "mongoose": "^5.0.17",
     "restify": "^6.4.0",
     "restify-errors": "^6.0.0",
     "restify-jwt-community": "^1.0.4",
@@ -41,6 +42,8 @@
     "cross-env": "^5.1.4",
     "eslint": "^4.19.1",
     "mocha": "^5.1.1",
+    "mocha-prepare": "^0.1.0",
+    "mongo-unit": "^1.3.2",
     "supertest": "^3.0.0"
   }
 }
