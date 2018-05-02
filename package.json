@@ -28,6 +28,7 @@
   "author": "The Impact Team (https://impactdevelopment.github.io)",
   "license": "MIT",
   "dependencies": {
+    "email-validator": "^2.0.3",
     "jsonwebtoken": "^8.2.1",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.17",

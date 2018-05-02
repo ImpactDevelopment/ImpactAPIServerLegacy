@@ -1,72 +1,67 @@
-
 const apiserver = rfr('test/server')
+const mongo = require('mongo-unit')
+const URL = rfr('config').MONGODB_URI
 const expect    = require('chai').expect
 
 describe('ROUTE: /api/register', () => {
-    it('should be a bad request without name', (done) => {
+    // Ensure a predicable database for each test
+    const data = require('../testData.json')
+    beforeEach(() => mongo.initDb(URL, data))
+    afterEach(() => mongo.drop())
+
+    it('should be a bad request without email', (done) => {
         apiserver
         .post('/api/register')
-        .send({ 'role': 'test' })
+        .send({ 'password': 'passwd' })
+        .expect(400)
         .expect('Content-type', /json/)
-        .end( (err, res) => {
-            if (err) {
-                console.log(err.message)
-                return done(new Error('Supertest encountered an error'))
-            }
-
-            expect(res.status).to.equal(400)
+        .then( (res) => {
             expect(res.body.code).to.equal('BadRequest')
             expect(res.body.message).to.equal('Incomplete registration information.')
 
             done()
         })
+        .catch((err) => {
+            console.log(err.message)
+            done(new Error('Supertest encountered an error'))
+        })
     })
-    it('should be a bad request without role', (done) => {
+    it('should be a bad request without password', (done) => {
         apiserver
         .post('/api/register')
-        .send({ 'name': 'ci-test-account' })
+        .send({ 'email': 'foo@bar.com' })
         .expect('Content-type', /json/)
-        .end( (err, res) => {
-            if (err) {
-                console.log(err.message)
-                return done(new Error('Supertest encountered an error'))
-            }
-
-            expect(res.status).to.equal(400)
+        .expect(400)
+        .then( (res) => {
             expect(res.body.code).to.equal('BadRequest')
             expect(res.body.message).to.equal('Incomplete registration information.')
 
             done()
         })
+        .catch((err) => {
+            console.log(err.message)
+            done(new Error('Supertest encountered an error'))
+        })
     })
-    it('should return input data with token', (done) => {
+    it('should return token', (done) => {
         apiserver
         .post('/api/register')
         .send({
-            'name': 'ci-test-account',
-            'role': 'test'
+            'email': 'foo@bar.com',
+            'password': 'passwd'
         })
         .expect('Content-type', /json/)
-        .end( (err, res) => {
-            if (err) {
-                console.log(err.message)
-                return done(new Error('Supertest encountered an error'))
-            }
-
-            // no errors
-            expect(res.status).to.equal(200)
+        // .expect(200)
+        .then((res) => {
             expect(res.body.error).to.be.undefined
-
-            // matches input
-            expect(res.body.name).to.equal('ci-test-account')
-            expect(res.body.role).to.equal('test')
-
-            // has output
             expect(res.body.token).to.not.be.undefined
-            expect(res.body.token).to.not.be.empty
             expect(res.body.token).to.be.a('string').that.is.not.empty
 
             done()
+        })
+        .catch((err) => {
+            console.log(err.message)
+            done(new Error('Supertest encountered an error'))
         })
     })
 })
