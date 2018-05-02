@@ -4,6 +4,9 @@ module.exports = {
         'node': true,
         'mocha': true
     },
+    'globals': {
+        'rfr': false // require from root module is made global in index.js
+    },
     'extends': 'eslint:recommended',
     'parserOptions': {
         'ecmaVersion': 2017

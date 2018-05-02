@@ -1,4 +1,4 @@
-const config    = require('../../config')
+const config    = rfr('config')
 
 module.exports = (server) => {
     server.get({ 'path': config.basePath('/ping'),

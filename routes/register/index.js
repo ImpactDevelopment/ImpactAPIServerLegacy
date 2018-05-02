@@ -1,4 +1,4 @@
-const config    = require('../../config')
+const config    = rfr('config')
 
 module.exports = (server) => {
     server.post({ 'path': config.basePath('/register'),

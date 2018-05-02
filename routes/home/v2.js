@@ -1,5 +1,5 @@
 const MODULE_ID = 'api:home:v2'
-const logger    = require('../../utils/logger')
+const logger    = rfr('utils/logger')
 
 module.exports = (req, res, next) => {
     logger.info('%s: request received', MODULE_ID)

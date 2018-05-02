@@ -1,6 +1,6 @@
 const MODULE_ID = 'api:register'
-const logger    = require('../../utils/logger')
-const config    = require('../../config')
+const logger    = rfr('utils/logger')
+const config    = rfr('config')
 const errors    = require('restify-errors')
 
 module.exports = (req, res, next) => {

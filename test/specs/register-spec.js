@@ -1,5 +1,5 @@
 
-const apiserver = require('../../test/server')
+const apiserver = rfr('test/server')
 const expect    = require('chai').expect
 
 describe('ROUTE: /api/register', () => {

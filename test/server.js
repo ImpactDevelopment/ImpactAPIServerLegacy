@@ -1,4 +1,4 @@
 const supertest   = require('supertest')
-const app         = require('../')
+const app         = rfr('')
 const server      = supertest(app)
 module.exports  = server

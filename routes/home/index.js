@@ -1,4 +1,4 @@
-const config    = require('../../config')
+const config    = rfr('config')
 
 // just to demo a route with multiple versions
 module.exports = (server) => {

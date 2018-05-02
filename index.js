@@ -1,6 +1,7 @@
 const MODULE_ID = 'app:main'
-const config    = require('./config')
-const logger    = require('./utils/logger')
+global.rfr = require('rfr') // Global for all modules (don't do this at home kids)
+const config    = rfr('/config')
+const logger    = rfr('/utils/logger')
 
 const jwt     = require('restify-jwt-community')
 const restify = require('restify')
@@ -24,7 +25,7 @@ server.use(jwt({
 }))
 
 // Routes
-require('./routes')(server)
+rfr('routes')(server)
 
 // Serve
 server.listen(config.PORT)

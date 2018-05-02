@@ -1,4 +1,4 @@
-const config    = require('../../config')
+const config    = rfr('config')
 
 module.exports = (server) => {
     const PATH = config.basePath('/admin/')

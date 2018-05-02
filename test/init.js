@@ -1,0 +1,1 @@
+global.rfr = require('rfr')

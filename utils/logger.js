@@ -1,5 +1,5 @@
 const winston   = require('winston')
-const config    = require('../config')
+const config    = rfr('config')
 
 const logger    = new (winston.Logger)({
     'level': config.LOG_LEVEL,

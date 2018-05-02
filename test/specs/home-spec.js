@@ -1,6 +1,6 @@
 
-const apiserver = require('../../test/server')
-const headers   = require('../../test/headers')
+const apiserver = rfr('test/server')
+const headers   = rfr('test/headers')
 const expect    = require('chai').expect
 
 describe('ROUTE: /api/home', function (){
