@@ -1,6 +1,7 @@
 const MODULE_ID = 'api:register'
 const jwt = require('jsonwebtoken')
 const validateEmail = require('email-validator').validate
+const { hash } = rfr('utils/hash')
 const logger    = rfr('utils/logger')
 const config    = rfr('config')
 const errors    = require('restify-errors')
@@ -22,14 +23,14 @@ module.exports = (req, res, next) => {
     }
 
     database.getUser({ 'email': req.body.email })
-    .then((user) => {
+    .then(async (user) => {
         if (user !== null) {
             return next(new errors.BadRequestError('User with email "' + req.body.email + '" already exists.'))
         }
 
         database.addUser({
             'email': req.body.email,
-            'password': req.body.password // TODO: hash
+            'password': await hash(req.body.password)
         })
         .then((user) => {
             // Send a response with a signed access token if the operation was a success
@@ -43,12 +44,12 @@ module.exports = (req, res, next) => {
             return next()
         })
         .catch((err) => {
-            logger.err('Error adding user ' + req.body.email, err)
+            logger.error('Error adding user ' + req.body.email, err)
             return next(new errors.InternalServerError('Error adding user to the database'))
         })
     })
     .catch((err) => {
-        logger.err('Error looking for user with email ' + req.body.email, err)
+        logger.error('Error looking for user with email ' + req.body.email, err)
         return next(new errors.InternalServerError('Error checking for existing user'))
     })
 }

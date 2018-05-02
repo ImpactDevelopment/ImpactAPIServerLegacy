@@ -10,6 +10,8 @@ module.exports = {
     'PORT'        : process.env['PORT'] || 8080,
     'JWT_SECRET'  : process.env['JWT_SECRET'] || DEFAULT_SECRET,
     'MONGODB_URI' : process.env['MONGODB_URI'] || 'mongodb://localhost:27017',
+    'SCRYPT_N'    : process.env['SCRYPT_N'] || Math.pow(2, 2), // Must be power of 2 // FIXME should be 2^20
+    'SCRYPT_TIME' : process.env['SCRYPT_TIME'] || 2, // FIXME should be 0.1
 
     // will be used for building route paths
     'basePath'    : (path) => API_ROOT.replace(/\/$/, '') + '/' + path.replace(/^\//, '')

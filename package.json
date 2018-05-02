@@ -36,6 +36,7 @@
     "restify-errors": "^6.0.0",
     "restify-jwt-community": "^1.0.4",
     "rfr": "^1.2.3",
+    "scrypt": "^6.0.3",
     "winston": "^2.4.2"
   },
   "devDependencies": {
