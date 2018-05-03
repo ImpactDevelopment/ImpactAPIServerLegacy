@@ -1,7 +1,7 @@
 const MODULE_ID = 'api:register'
 const jwt = require('jsonwebtoken')
 const validateEmail = require('email-validator').validate
-const { hash } = rfr('utils/hash')
+const { hash } = require('scrypt-for-humans')
 const logger    = rfr('utils/logger')
 const config    = rfr('config')
 const errors    = require('restify-errors')
