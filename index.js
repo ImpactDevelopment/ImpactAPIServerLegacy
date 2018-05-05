@@ -4,7 +4,6 @@ const config = rfr('/config')
 const logger = rfr('/utils/logger')
 
 const restify = require('restify')
-const jwt = require('restify-jwt-community')
 const mongoose = require('mongoose')
 const plugins = require('restify').plugins
 
@@ -15,16 +14,7 @@ mongoose.connect(config.MONGODB_URI)
 const server = restify.createServer()
 
 // Auth
-server.use(jwt({
-    // Config
-    'secret': config.JWT_SECRET
-}).unless({
-    // Unauthenticated paths
-    'path': [
-        config.basePath('/ping'),
-        config.basePath('/register')
-    ]
-}))
+rfr('service/auth')(server)
 
 // Throttling
 server.use(plugins.throttle({
