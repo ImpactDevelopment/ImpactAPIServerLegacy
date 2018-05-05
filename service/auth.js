@@ -32,6 +32,7 @@ module.exports = (server) => {
         // Unauthenticated paths
         'path': [
             basePath('/ping'),
+            basePath('/login'),
             basePath('/register')
         ]
     }))
