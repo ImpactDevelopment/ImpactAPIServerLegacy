@@ -20,8 +20,8 @@ module.exports = async (req, res, next) => {
     }
 
     try {
-        if (await User.findOne({ 'email': req.body.email }) !== null) {
-            return next(new errors.BadRequestError('User with email "' + req.body.email + '" already exists.'))
+        if (await User.findOne({ 'email': req.body.email })) {
+            return next(new errors.InvalidCredentialsError('User with email "' + req.body.email + '" already exists.'))
         }
 
         const user = new User({

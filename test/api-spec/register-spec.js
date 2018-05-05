@@ -43,6 +43,19 @@ describe('ROUTE: /api/register', () => {
             done(new Error('Supertest encountered an error'))
         })
     })
+    it('should not allow duplicate accounts', async () => {
+        const res = await apiserver
+        .post('/api/register')
+        .send({
+            'email': data.users[0].email,
+            'password': 'passwd'
+        })
+        .expect('Content-type', /json/)
+        .expect(401)
+
+        expect(res.body.code).to.equal('InvalidCredentials')
+        expect(res.body.message).to.equal('User with email "' + data.users[0].email + '" already exists.')
+    })
     it('should return token', (done) => {
         apiserver
         .post('/api/register')
@@ -51,7 +64,7 @@ describe('ROUTE: /api/register', () => {
             'password': 'passwd'
         })
         .expect('Content-type', /json/)
-        // .expect(200)
+        .expect(200)
         .then((res) => {
             expect(res.body.error).to.be.undefined
             expect(res.body.token).to.not.be.undefined
