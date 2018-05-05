@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 const { hash, verifyHash, PasswordError } = require('scrypt-for-humans')
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = rfr('config')
 
 const UserSchema = new Schema({
     'email': {
@@ -28,13 +30,21 @@ UserSchema.pre('save', async function (next) {
     return next()
 })
 
-UserSchema.methods.comparePassword = async function (candidatePassword) {
-    try {
-        return await verifyHash(candidatePassword, this['password'])
-    } catch (e) {
-        if (!(e instanceof PasswordError)) throw e
+// Model methods
+Object.assign(UserSchema.methods, {
+    'comparePassword': async function (candidatePassword) {
+        try {
+            return await verifyHash(candidatePassword, this['password'])
+        } catch (e) {
+            if (!(e instanceof PasswordError)) throw e
+        }
+        return false
+    },
+    'genToken': function () {
+        return jwt.sign({
+            'email': this['email']
+        }, JWT_SECRET)
     }
-    return false
-}
+})
 
 module.exports = mongoose.model('users', UserSchema)

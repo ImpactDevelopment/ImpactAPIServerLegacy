@@ -1,5 +1,7 @@
 const expect = require('chai').expect
 const mongo = require('mongo-unit')
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = rfr('config')
 const User = rfr('service/user')
 const URL = rfr('config').MONGODB_URI
 
@@ -67,6 +69,27 @@ describe('UNIT: User', () => {
         }).save()
 
         expect(await user.comparePassword('correct')).to.be.true
-        expect(await user.comparePassword('passwd')).to.be.false
+        expect(await user.comparePassword('incorrect')).to.be.false
+    })
+
+    it('should generate a valid token', async () => {
+        // Get a user and generate a token
+        const user = await User.findOne()
+        const token = user.genToken()
+
+        // Basic checks
+        expect(token).not.to.be.undefined
+        expect(token).to.be.a('string').that.is.not.empty
+
+        // Check valid
+        let payload
+        expect(() => payload = jwt.verify(token, JWT_SECRET)).not.to.throw(jwt.JsonWebTokenError, null, 'Problem verifying token')
+
+        // Check payload
+        expect(payload).to.be.an('object')
+        expect(payload).to.have.ownProperty('email')
+        expect(payload.email).to.equal(user.email)
+        expect(payload).to.have.ownProperty('iat')
+        expect(Math.floor(Date.now() / 1000) - payload.iat).to.be.within(0, 1, 'Token age')
     })
 })

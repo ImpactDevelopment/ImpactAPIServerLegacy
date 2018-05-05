@@ -1,8 +1,6 @@
 const MODULE_ID = 'api:register'
-const jwt = require('jsonwebtoken')
 const validateEmail = require('email-validator').validate
 const logger    = rfr('utils/logger')
-const config    = rfr('config')
 const errors    = require('restify-errors')
 const User  = rfr('service/user')
 
@@ -34,11 +32,9 @@ module.exports = async (req, res, next) => {
             await user.save()
             // Send a response with a signed access token if the operation was a success
             res.send({
-                'token' : jwt.sign({
-                    'uuid' : user.id,
-                    'iat'  : Math.floor(Date.now() / 1000)
-                }, config.JWT_SECRET)
+                'token': user.genToken()
             })
+
             logger.info('%s: response sent', MODULE_ID)
             return next()
         } catch(err) {
