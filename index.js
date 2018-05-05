@@ -1,15 +1,18 @@
 const MODULE_ID = 'app:main'
 global.rfr = require('rfr') // Global for all modules (don't do this at home kids)
-const config    = rfr('/config')
-const logger    = rfr('/utils/logger')
+const config = rfr('/config')
+const logger = rfr('/utils/logger')
 
-const jwt     = require('restify-jwt-community')
 const restify = require('restify')
+const jwt = require('restify-jwt-community')
+const mongoose = require('mongoose')
 const plugins = require('restify').plugins
 
 logger.info('%s: initializing', MODULE_ID)
 
-const server  = restify.createServer()
+mongoose.connect(config.MONGODB_URI)
+
+const server = restify.createServer()
 
 // Auth
 server.use(jwt({
