@@ -1,13 +1,9 @@
-const MODULE_ID = 'app:main'
 global.rfr = require('rfr') // Global for all modules (don't do this at home kids)
-const config = rfr('/config')
-const logger = rfr('/utils/logger')
-
 const restify = require('restify')
 const mongoose = require('mongoose')
 const plugins = require('restify').plugins
-
-logger.info('%s: initializing', MODULE_ID)
+const config = rfr('/config')
+const logger = rfr('/utils/logger')
 
 mongoose.connect(config.MONGODB_URI)
 
@@ -44,7 +40,7 @@ rfr('routes')(server)
 
 // Serve
 server.listen(config.PORT)
-logger.info('%s: ready. listening on PORT ', MODULE_ID, config.PORT)
+logger.info('Server listening on PORT ', config.PORT)
 
 module.exports = server
 
