@@ -1,25 +1,26 @@
-
-const apiserver    = rfr('test/server')
-const headers   = rfr('test/headers')
-const expect    = require('chai').expect
+const expect = require('chai').expect
+const mongo = require('mongo-unit')
+const URL = rfr('config').MONGODB_URI
+const apiserver = rfr('test/server')
+const User = rfr('service/user')
 
 describe('ROUTE: /api/whoami', function (){
-    it('should say name is ci-test-account', (done) => {
-        apiserver
+    // Ensure a predicable database for each test
+    const data = require('../testData.json')
+    beforeEach(() => mongo.initDb(URL, data))
+    afterEach(() => mongo.drop())
+
+    it('should return correct email', async () => {
+        const user = await User.findOne()
+        const token = await user.genToken()
+
+        const res = await apiserver
         .get('/api/whoami')
-        .set('Authorization', headers.Authorization)
+        .set('Authorization', 'Bearer ' + token)
         .expect('Content-type', /json/)
-        .expect(200) // THis is HTTP response
-        .end( (err, res) => {
-            if (err) {
-                console.log(err.message)
-                return done(new Error('Supertest encountered an error'))
-            }
+        .expect(200)
 
-            expect(res.body.error).to.undefined
-            expect(res.body.name).to.equal('ci-test-account')
-
-            return done()
-        })
+        expect(res.body.error).to.undefined
+        expect(res.body.email).to.equal(user.email)
     })
 })
