@@ -17,17 +17,19 @@ const server = restify.createServer()
 rfr('service/auth')(server)
 
 // Throttling
-server.use(plugins.throttle({
-    'ip': true,
-    'rate': 1, // Limit each ip to 1 request/second
-    'burst': 8, // Maximum 8 concurrent requests
-    'overrides': {
-        '127.0.0.1' :{
-            'rate': 0,
-            'burst': 0
+if (!config.TEST) {
+    server.use(plugins.throttle({
+        'ip': true,
+        'rate': 1, // Limit each ip to 1 request/second
+        'burst': 8, // Maximum 8 concurrent requests
+        'overrides': {
+            '127.0.0.1' :{
+                'rate': 0,
+                'burst': 0
+            }
         }
-    }
-}))
+    }))
+}
 
 // Plugins
 server.pre(restify.pre.userAgentConnection()) // Special handling for curl

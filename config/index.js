@@ -6,6 +6,7 @@ const API_ROOT  = '/api'
 const DEFAULT_SECRET = 'some-secret'
 
 module.exports = {
+    'TEST'        : process.env['TEST'] === 'true' || process.env['TEST'] === '1' || false,
     'LOG_LEVEL'   : process.env['LOG_LEVEL'] || 'info',
     'PORT'        : process.env['PORT'] || 8080,
     'JWT_SECRET'  : process.env['JWT_SECRET'] || DEFAULT_SECRET,
