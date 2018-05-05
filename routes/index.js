@@ -5,5 +5,4 @@ module.exports = (server) => {
 
     // protected routes
     require('./whoami')(server)
-    require('./admin')(server)
 }
