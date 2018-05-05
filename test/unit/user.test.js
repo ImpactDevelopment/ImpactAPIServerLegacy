@@ -92,4 +92,12 @@ describe('UNIT: User', () => {
         expect(payload).to.have.ownProperty('iat')
         expect(Math.floor(Date.now() / 1000) - payload.iat).to.be.within(0, 1, 'Token age')
     })
+
+    it('should not select password by default', async () => {
+        const normal = await User.findOne()
+        const special = await User.findOne().select('+password')
+
+        expect(normal.password).to.be.undefined
+        expect(special.password).to.not.be.undefined
+    })
 })
