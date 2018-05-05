@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
             await user.save()
             // Send a response with a signed access token if the operation was a success
             res.send({
-                'token': user.genToken()
+                'token': await user.genToken()
             })
 
             logger.info('%s: response sent', MODULE_ID)

@@ -41,9 +41,10 @@ Object.assign(UserSchema.methods, {
         return false
     },
     'genToken': function () {
-        return jwt.sign({
+        return new Promise((resolve, reject) => jwt.sign({
             'email': this['email']
-        }, JWT_SECRET)
+        },
+        JWT_SECRET, (error, payload) => error ? reject(error) : resolve(payload)))
     }
 })
 

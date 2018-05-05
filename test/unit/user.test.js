@@ -75,13 +75,13 @@ describe('UNIT: User', () => {
     it('should generate a valid token', async () => {
         // Get a user and generate a token
         const user = await User.findOne()
-        const token = user.genToken()
+        const token = await user.genToken()
 
         // Basic checks
         expect(token).not.to.be.undefined
         expect(token).to.be.a('string').that.is.not.empty
 
-        // Check valid
+        // Check valid - use sync api since this is only a test
         let payload
         expect(() => payload = jwt.verify(token, JWT_SECRET)).not.to.throw(jwt.JsonWebTokenError, null, 'Problem verifying token')
 
