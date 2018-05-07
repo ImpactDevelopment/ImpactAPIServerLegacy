@@ -1,6 +1,8 @@
-const config    = rfr('config')
+import { basePath } from 'config'
+import reqdir from 'utils/reqdir'
+const versions = reqdir(module)
 
-module.exports = (server) => {
-    server.post({ 'path': config.basePath('/login'),
-        'version': '1.0.0' }, require('./v1'))
+export default (server) => {
+    server.post({ 'path': basePath('/login'),
+        'version': '1.0.0' }, versions.v1)
 }

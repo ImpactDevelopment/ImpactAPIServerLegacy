@@ -1,0 +1,8 @@
+{
+    "mode": "auto",
+    "cjs": {
+        "namedExports": true,
+        "paths": true,
+        "vars": true
+    }
+}

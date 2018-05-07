@@ -1,7 +1,6 @@
 // Initialise mocha testing
-global.rfr = require('rfr')
-const prepare = require('mocha-prepare')
-const mongo = require('mongo-unit')
+import prepare from 'mocha-prepare'
+import mongo from 'mongo-unit'
 
 process.env.TEST = 'true'
 

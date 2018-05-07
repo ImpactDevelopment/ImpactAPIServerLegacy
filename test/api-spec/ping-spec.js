@@ -1,6 +1,5 @@
-
-const apiserver = rfr('test/server')
-const expect    = require('chai').expect
+import { expect } from 'chai'
+import apiserver from 'test/server'
 
 describe('ROUTE: /api/ping', () => {
     it('should say OK', (done) => {

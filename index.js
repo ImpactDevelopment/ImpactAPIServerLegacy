@@ -1,19 +1,20 @@
-global.rfr = require('rfr') // Global for all modules (don't do this at home kids)
-const restify = require('restify')
-const mongoose = require('mongoose')
-const plugins = require('restify').plugins
-const config = rfr('/config')
-const logger = rfr('/utils/logger')
+import restify from 'restify'
+import mongoose from 'mongoose'
+import { plugins } from 'restify'
+import { MONGODB_URI, TEST, PORT } from 'config'
+import logger from 'utils/logger'
+import auth from 'service/auth'
+import reqdir from 'utils/reqdir'
 
-mongoose.connect(config.MONGODB_URI)
+mongoose.connect(MONGODB_URI)
 
 const server = restify.createServer()
 
 // Auth
-rfr('service/auth')(server)
+auth(server)
 
 // Throttling
-if (!config.TEST) {
+if (!TEST) {
     server.use(plugins.throttle({
         'ip': true,
         'rate': 1, // Limit each ip to 1 request/second
@@ -36,11 +37,17 @@ server.use(plugins.dateParser(60 * 3)) // Reject requests whose clocks are 3 min
 server.use(plugins.gzipResponse()) // Compress response if the request asks us to
 
 // Routes
-rfr('routes')(server)
+Object.values(reqdir(module, './routes')).forEach((element) => {
+    // Check if this entry has an index or not
+    const route = element.hasOwnProperty('index') ? element.index : element
+
+    // If the route is a function, run it
+    if (typeof route === 'function') route(server)
+})
 
 // Serve
-server.listen(config.PORT)
-logger.info('Server listening on PORT ', config.PORT)
+server.listen(PORT)
+logger.info('Server listening on PORT ', PORT)
 
-module.exports = server
+export default server
 

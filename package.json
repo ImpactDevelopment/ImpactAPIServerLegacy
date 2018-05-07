@@ -7,9 +7,9 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "pretest": "npm run lint",
-    "test": "cross-env LOG_LEVEL=error mocha --recursive --reporter spec --exit --require ./test/init.js ./test/unit/ ./test/api-spec/",
-    "debug": "cross-env LOG_LEVEL=debug node index.js",
-    "start": "node index.js"
+    "test": "cross-env LOG_LEVEL=error NODE_PATH=. mocha -r esm -r ./test/init.js --recursive --reporter spec --exit ./test/unit/ ./test/api-spec/",
+    "debug": "cross-env LOG_LEVEL=debug NODE_PATH=. node index.js",
+    "start": "cross-env NODE_PATH=. node -r esm index.js"
   },
   "repository": {
     "type": "git",
@@ -29,13 +29,14 @@
   "license": "MIT",
   "dependencies": {
     "email-validator": "^2.0.3",
+    "esm": "^3.0.29",
     "jsonwebtoken": "^8.2.1",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.17",
+    "require-directory": "^2.1.1",
     "restify": "^6.4.0",
     "restify-errors": "^6.0.0",
     "restify-jwt-community": "^1.0.4",
-    "rfr": "^1.2.3",
     "scrypt-for-humans": "^2.0.5",
     "winston": "^2.4.2"
   },

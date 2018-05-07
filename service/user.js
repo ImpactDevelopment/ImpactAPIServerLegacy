@@ -1,10 +1,9 @@
-const mongoose = require('mongoose')
-const { Schema } = mongoose
-const { hash, verifyHash, PasswordError } = require('scrypt-for-humans')
-const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = rfr('config')
+import mongoose from 'mongoose'
+import { hash, verifyHash, PasswordError } from 'scrypt-for-humans'
+import jwt from 'jsonwebtoken'
+import { JWT_SECRET } from 'config'
 
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     'email': {
         'type': String,
         'required': true,
@@ -48,4 +47,4 @@ Object.assign(UserSchema.methods, {
     }
 })
 
-module.exports = mongoose.model('users', UserSchema)
+export default mongoose.model('users', UserSchema)

@@ -12,7 +12,7 @@ Finally you want to install the project's dependencies using npm. `cd` a termina
 
 ## Running
 
-To start the server you can run either `npm start` or `node index.js`. You should see something like this:
+To start the server run `npm start`. You should see something like this:
 
 ```bash
 $ npm start
@@ -26,6 +26,8 @@ info: app:main: ready. listening on PORT  8080
 ```
 
 You can now send requests to `localhost` using the port printed by the server (in the example above that's `localhost:8080`)
+
+_Note: it is important to use `npm start` instead of `node index.js` because we set a custom `NODE_PATH` and require [`esm`](https://github.com/standard-things/esm)_
 
 ## Credits
 

@@ -1,11 +1,11 @@
-const validateEmail = require('email-validator').validate
-const logger    = rfr('utils/logger')
-const errors    = require('restify-errors')
-const User  = rfr('service/user')
+import { validate as validateEmail } from 'email-validator'
+import errors from 'restify-errors'
+import logger    from 'utils/logger'
+import User  from 'service/user'
 
 const passwordRegex = RegExp('[a-zA-Z0-9_!@#$%^&*()+{}|:">?=\\;\'./]{1,64}')
 
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
     if (!req.body.email || !req.body.password) {
         return next(new errors.BadRequestError('Incomplete registration information.'))
     }

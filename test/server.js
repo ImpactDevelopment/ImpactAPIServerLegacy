@@ -1,4 +1,5 @@
-const supertest   = require('supertest')
-const app         = rfr('')
-const server      = supertest(app)
-module.exports  = server
+import supertest from 'supertest'
+import app from '../'
+const server = supertest(app)
+
+export default server

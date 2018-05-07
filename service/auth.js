@@ -1,7 +1,7 @@
-const jwt = require('restify-jwt-community')
-const errors = require('restify-errors')
-const { JWT_SECRET, JWT_LIFE, basePath } = rfr('config')
-const User = require('./user')
+import jwt from 'restify-jwt-community'
+import errors from 'restify-errors'
+import User from './user'
+import { JWT_SECRET, JWT_LIFE, basePath } from 'config'
 
 function isRevoked (req, payload, done) {
     const life = Math.floor(Date.now() / 1000) - Number.parseInt(payload.iat)
@@ -22,7 +22,7 @@ async function loadUser (req, res, next) {
     return next()
 }
 
-module.exports = (server) => {
+export default (server) => {
     server.use(jwt({
         // Config
         'secret': JWT_SECRET,

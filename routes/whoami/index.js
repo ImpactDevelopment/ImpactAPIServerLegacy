@@ -1,7 +1,9 @@
-const config    = rfr('config')
+import { basePath } from 'config'
+import reqdir from 'utils/reqdir'
+const versions = reqdir(module)
 
-module.exports = (server) => {
-    const PATH = config.basePath('/whoami/')
+export default (server) => {
+    const PATH = basePath('/whoami/')
     server.get({ 'path': PATH,
-        'version': '1.0.0' }, require('./v1'))
+        'version': '1.0.0' }, versions.v1)
 }

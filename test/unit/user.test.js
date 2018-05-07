@@ -1,15 +1,14 @@
-const expect = require('chai').expect
-const mongo = require('mongo-unit')
-const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = rfr('config')
-const User = rfr('service/user')
-const URL = rfr('config').MONGODB_URI
+import { expect } from 'chai'
+import { initDb, drop } from 'mongo-unit'
+import { verify, JsonWebTokenError } from 'jsonwebtoken'
+import { MONGODB_URI as URL,  JWT_SECRET } from 'config'
+import User from 'service/user'
+import data from '../testData.json'
 
 describe('UNIT: User', () => {
     // Ensure a predicable database for each test
-    const data = require('../testData.json')
-    beforeEach(() => mongo.initDb(URL, data))
-    afterEach(() => mongo.drop())
+    beforeEach(() => initDb(URL, data))
+    afterEach(() => drop())
 
     it('should find all users', async () => {
         const users = await User.find()
@@ -83,7 +82,7 @@ describe('UNIT: User', () => {
 
         // Check valid - use sync api since this is only a test
         let payload
-        expect(() => payload = jwt.verify(token, JWT_SECRET)).not.to.throw(jwt.JsonWebTokenError, null, 'Problem verifying token')
+        expect(() => payload = verify(token, JWT_SECRET)).not.to.throw(JsonWebTokenError, null, 'Problem verifying token')
 
         // Check payload
         expect(payload).to.be.an('object')

@@ -1,14 +1,14 @@
-const expect    = require('chai').expect
-const mongo = require('mongo-unit')
-const { MONGODB_URI } = rfr('config')
-const apiserver = rfr('test/server')
-const User = rfr('service/user')
+import { expect } from 'chai'
+import mongo from 'mongo-unit'
+import { MONGODB_URI as URL } from 'config'
+import apiserver from 'test/server'
+import User from 'service/user'
+import data from '../testData.json'
 
 describe('ROUTE: /api/login', () => {
     // Ensure a predicable database for each test
-    const data = require('../testData.json')
     beforeEach(async () => {
-        mongo.initDb(MONGODB_URI, data)
+        mongo.initDb(URL, data)
         await new User({
             'email': 'foo@bar.com',
             'password': 'correct'
