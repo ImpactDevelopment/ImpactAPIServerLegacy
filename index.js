@@ -6,7 +6,13 @@ import logger from 'utils/logger'
 import auth from 'service/auth'
 import reqdir from 'utils/reqdir'
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI).catch((err) => {
+    if (err.message.includes('failed to connect to server')) {
+        logger.error('Failed to connect to mongodb server!')
+        process.exit() // eslint-disable-line no-process-exit
+    }
+    throw err
+})
 
 const server = restify.createServer()
 
