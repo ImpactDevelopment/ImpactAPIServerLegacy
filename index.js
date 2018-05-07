@@ -16,6 +16,14 @@ mongoose.connect(MONGODB_URI).catch((err) => {
 
 const server = restify.createServer()
 
+// Event handlers
+server.on('restifyError', function (req, res, err, cb) {
+    // Prepend custom members to the error response json
+    const json = err.toJSON()
+    err.toJSON = () => Object.assign({ 'status': 'failed' }, json)
+    return cb()
+})
+
 // Auth
 auth(server)
 
