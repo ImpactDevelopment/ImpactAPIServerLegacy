@@ -1,5 +1,5 @@
 import { Logger, transports } from 'winston'
-import { LOG_LEVEL } from 'config'
+import { LOG_LEVEL } from '~/config'
 
 const logger = new (Logger)({
     'level': LOG_LEVEL,

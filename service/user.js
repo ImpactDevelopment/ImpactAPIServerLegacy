@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { hash, verifyHash, PasswordError } from 'scrypt-for-humans'
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from 'config'
+import { JWT_SECRET } from '~/config'
 
 const UserSchema = new mongoose.Schema({
     'email': {

@@ -1,10 +1,11 @@
+import 'module-alias/register'
 import restify from 'restify'
 import mongoose from 'mongoose'
 import { plugins } from 'restify'
-import { MONGODB_URI, TEST, PORT } from 'config'
-import logger from 'utils/logger'
-import auth from 'service/auth'
-import reqdir from 'utils/reqdir'
+import { MONGODB_URI, TEST, PORT } from '~/config'
+import logger from '~/utils/logger'
+import auth from '~/service/auth'
+import reqdir from '~/utils/reqdir'
 
 mongoose.connect(MONGODB_URI).catch((err) => {
     if (err.message.includes('failed to connect to server')) {

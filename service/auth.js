@@ -1,7 +1,7 @@
 import jwt from 'restify-jwt-community'
 import errors from 'restify-errors'
 import User from './user'
-import { JWT_SECRET, JWT_LIFE, basePath } from 'config'
+import { JWT_SECRET, JWT_LIFE, basePath } from '~/config'
 
 function isRevoked (req, payload, done) {
     const life = Math.floor(Date.now() / 1000) - Number.parseInt(payload.iat)

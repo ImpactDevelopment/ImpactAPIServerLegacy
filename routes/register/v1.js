@@ -1,7 +1,7 @@
 import { validate as validateEmail } from 'email-validator'
 import errors from 'restify-errors'
-import logger    from 'utils/logger'
-import User  from 'service/user'
+import logger    from '~/utils/logger'
+import User  from '~/service/user'
 
 const passwordRegex = RegExp('[a-zA-Z0-9_!@#$%^&*()+{}|:">?=\\;\'./]{1,64}')
 

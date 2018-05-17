@@ -1,5 +1,5 @@
-import { basePath } from 'config'
-import reqdir from 'utils/reqdir'
+import { basePath } from '~/config'
+import reqdir from '~/utils/reqdir'
 const versions = reqdir(module)
 
 export default (server) => {

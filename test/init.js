@@ -1,4 +1,5 @@
 // Initialise mocha testing
+import 'module-alias/register'
 import prepare from 'mocha-prepare'
 import mongo from 'mongo-unit'
 

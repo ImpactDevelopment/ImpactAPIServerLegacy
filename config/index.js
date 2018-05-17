@@ -1,4 +1,4 @@
-import logger from 'utils/logger'
+import logger from '~/utils/logger'
 
 // this will be used to prefix route paths.
 // a workaround since restify does not have this yet

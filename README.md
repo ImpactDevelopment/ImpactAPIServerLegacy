@@ -27,7 +27,7 @@ info: app:main: ready. listening on PORT  8080
 
 You can now send requests to `localhost` using the port printed by the server (in the example above that's `localhost:8080`)
 
-_Note: it is important to use `npm start` instead of `node index.js` because we set a custom `NODE_PATH` and require [`esm`](https://github.com/standard-things/esm)_
+_Note: it is important to use `npm start` instead of `node index.js` because we use [`esm`](https://github.com/standard-things/esm)_
 
 ## Credits
 

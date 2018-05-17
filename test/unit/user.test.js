@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import { initDb, drop } from 'mongo-unit'
 import { verify, JsonWebTokenError } from 'jsonwebtoken'
-import { MONGODB_URI as URL,  JWT_SECRET } from 'config'
-import User from 'service/user'
+import { MONGODB_URI as URL,  JWT_SECRET } from '~/config'
+import User from '~/service/user'
 import data from '../testData.json'
 
 describe('UNIT: User', () => {

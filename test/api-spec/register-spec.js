@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { initDb, drop } from 'mongo-unit'
-import apiserver from 'test/server'
-import { MONGODB_URI as URL } from 'config'
+import apiserver from '~/test/server'
+import { MONGODB_URI as URL } from '~/config'
 import data from '../testData.json'
 
 describe('ROUTE: /api/register', () => {

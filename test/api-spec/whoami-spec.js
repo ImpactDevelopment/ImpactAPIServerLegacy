@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import { initDb, drop } from 'mongo-unit'
-import { MONGODB_URI as URL } from 'config'
-import apiserver from 'test/server'
-import User from 'service/user'
+import { MONGODB_URI as URL } from '~/config'
+import apiserver from '~/test/server'
+import User from '~/service/user'
 import data from '../testData.json'
 
 describe('ROUTE: /api/whoami', function (){
